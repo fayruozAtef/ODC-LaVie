@@ -1,4 +1,8 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:lavei/layout/lavie_layout/lavie_layout_screen.dart';
+
+import 'module/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  Scaffold(appBar:AppBar(title: Text('Flutter Demo Home Page'))),
+      home: AnimatedSplashScreen(
+        duration: 3000,
+        splash: SplashScreen(),
+        nextScreen: LavieLayoutScreen(),
+        splashTransition: SplashTransition.slideTransition,
+      ),
     );
   }
 }
