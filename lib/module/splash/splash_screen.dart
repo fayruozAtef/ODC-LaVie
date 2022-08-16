@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lavei/shared/component/components.dart';
 
 import '../../layout/lavie_layout/lavie_layout_screen.dart';
@@ -25,15 +26,17 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.transparent,
       body: Center(
         child: Stack(
-          alignment: Alignment.topCenter,
-          children: const [
+          alignment: Alignment.center,
+          children: [
             Text(
-                'La \t Vie',
-              style: TextStyle(fontSize: 36.0,height: 15,fontFamily: 'Meddon',color: Colors.black),
+                'La  Vie',
+              style: GoogleFonts.meddon(
+                textStyle: TextStyle(fontSize: 36.0,color: Colors.black),
+              ),
             ),
-            SizedBox(
-              width: 25.0,
-              height: 25.0,
+            const SizedBox(
+              width: 29.0,
+              height: 19.0,
               child: Image(image: AssetImage('assets/images/img.png')),
             ),
           ],
