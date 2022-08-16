@@ -86,4 +86,4 @@ Widget defaultButton({
   ),
 );
 
-Widget mySpace()=>const SizedBox(height: 40.0,);
+Widget mySpace()=>const SizedBox(height: 25.0,);

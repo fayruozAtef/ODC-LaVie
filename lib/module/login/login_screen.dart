@@ -5,8 +5,10 @@ import 'package:lavei/shared/component/components.dart';
 
 class LoginScreen extends StatelessWidget {
 
+  var formKey= GlobalKey<FormState>();
   var emailController= TextEditingController();
   var passwordController= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,48 +16,58 @@ class LoginScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                mySpace(),
-                 Text(
-                    'Email',
-                  style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  mySpace(),
+                   Text(
+                      'Email',
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 2.0,),
-                defaultTextFormField(
-                    controler: emailController,
-                    input: TextInputType.emailAddress,
+                  const SizedBox(height: 2.0,),
+                  defaultTextFormField(
+                      controler: emailController,
+                      input: TextInputType.emailAddress,
+                      validate: (value){
+                        if(value!.isEmpty){
+                          return 'Enter your email';
+                        }
+                      },
+                      lable: '',
+                  ),
+                  mySpace(),
+                  Text(
+                    'Password',
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
+                    ),
+                  ),
+                  const SizedBox(height: 2.0,),
+                  defaultTextFormField(
+                    controler: passwordController,
+                    input: TextInputType.text,
                     validate: (value){
                       if(value!.isEmpty){
-                        return 'Enter your email';
+                        return 'Enter your password';
                       }
                     },
                     lable: '',
-                ),
-                mySpace(),
-                Text(
-                  'Password',
-                  style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
                   ),
-                ),
-                const SizedBox(height: 2.0,),
-                defaultTextFormField(
-                  controler: passwordController,
-                  input: TextInputType.text,
-                  validate: (value){
-                    if(value!.isEmpty){
-                      return 'Enter your password';
-                    }
-                  },
-                  lable: '',
-                ),
-                mySpace(),
-                defaultButton(function: (){}, text: 'Login'),
-              ],
+                  mySpace(),
+                  defaultButton(
+                      function: (){
+                        if(formKey.currentState!.validate()){
+
+                        }
+                      },
+                      text: 'Login'
+                  ),
+                ],
+              ),
             ),
           ),
         ),
