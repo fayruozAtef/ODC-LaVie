@@ -87,3 +87,5 @@ Widget defaultButton({
 );
 
 Widget mySpace()=>const SizedBox(height: 25.0,);
+
+Widget myLine()=>Container(height: 2.0,color: Colors.grey[300],);

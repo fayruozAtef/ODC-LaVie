@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:lavei/module/login/login_cubit/login_cubit.dart';
+import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/style/colors.dart';
 
 import '../../module/login/login_cubit/login_states.dart';
@@ -25,7 +27,7 @@ class LoginLayout extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 180.0,
+                        height: 160.0,
                         child: Stack(
                           alignment: Alignment.topRight,
                           children: [
@@ -37,7 +39,7 @@ class LoginLayout extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top:120.0),
+                        padding: const EdgeInsets.only(top:130.0),
                         child: Center(
                           child: Column(
                             children: [
@@ -87,6 +89,20 @@ class LoginLayout extends StatelessWidget {
                                       children: [
                                         Container(
                                           child: LoginCubit.get(context).screens[LoginCubit.get(context).currentIndex],
+                                        ),
+                                        const SizedBox(height: 20.0,),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 45),
+                                          child: Row(
+                                            children: [
+                                              Expanded(child: Container(height: 1.0,color: HexColor('#979797'),)),
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(horizontal: 2.0),
+                                                child: Text('or continue with',style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12.0,color: HexColor('#979797'))),),
+                                              ),
+                                              Expanded(child: Container(height: 1.0,color: HexColor('#979797'),)),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
