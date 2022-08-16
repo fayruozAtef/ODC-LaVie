@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.transparent,
       body: Center(
         child: Stack(
-          alignment: Alignment.center,
+          alignment: Alignment.topCenter,
           children: [
             Text(
                 'La  Vie',
@@ -34,10 +34,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 textStyle: TextStyle(fontSize: 36.0,color: Colors.black),
               ),
             ),
-            const SizedBox(
-              width: 29.0,
-              height: 19.0,
-              child: Image(image: AssetImage('assets/images/img.png')),
+            const Padding(
+              padding: EdgeInsetsDirectional.only(top: 25.0),
+              child: SizedBox(
+                width: 29.0,
+                height: 19.0,
+                child: Image(image: AssetImage('assets/images/img.png')),
+              ),
             ),
           ],
         ),
