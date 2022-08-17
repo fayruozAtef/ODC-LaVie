@@ -1,7 +1,10 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lavei/module/login/login_cubit/login_cubit.dart';
+import 'package:lavei/module/login/login_cubit/login_states.dart';
 import 'package:lavei/shared/component/components.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,25 +15,27 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 45),
-          child: SingleChildScrollView(
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  mySpace(),
-                   Text(
+    return BlocConsumer<LoginCubit,LoginStates>(
+      listener: (context, state){},
+      builder: (context,state)=>Container(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 45),
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    mySpace(),
+                    Text(
                       'Email',
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 2.0,),
-                  defaultTextFormField(
+                    const SizedBox(height: 2.0,),
+                    defaultTextFormField(
                       controler: emailController,
                       input: TextInputType.emailAddress,
                       validate: (value){
@@ -39,35 +44,46 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                       lable: '',
-                  ),
-                  mySpace(),
-                  Text(
-                    'Password',
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
                     ),
-                  ),
-                  const SizedBox(height: 2.0,),
-                  defaultTextFormField(
-                    controler: passwordController,
-                    input: TextInputType.text,
-                    validate: (value){
-                      if(value!.isEmpty){
-                        return 'Enter your password';
-                      }
-                    },
-                    lable: '',
-                  ),
-                  mySpace(),
-                  defaultButton(
-                      function: (){
+                    mySpace(),
+                    Text(
+                      'Password',
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
+                      ),
+                    ),
+                    const SizedBox(height: 2.0,),
+                    defaultTextFormField(
+                      controler: passwordController,
+                      input: TextInputType.text,
+                      isPassword: true,
+                      validate: (value){
+                        if(value!.isEmpty){
+                          return 'Enter your password';
+                        }
+                      },
+                      onSubmitted: (value){
                         if(formKey.currentState!.validate()){
                           LoginCubit.get(context).loginWithEmailAndPassword(email: emailController.text, password: passwordController.text);
                         }
                       },
-                      text: 'Login'
-                  ),
-                ],
+                      lable: '',
+                    ),
+                    mySpace(),
+                    ConditionalBuilder(
+                        condition: state is! LoginWithEmailAndPasswordLoadingState,
+                        builder: (context)=>defaultButton(
+                            function: (){
+                              if(formKey.currentState!.validate()){
+                                LoginCubit.get(context).loginWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+                              }
+                            },
+                            text: 'Login'
+                        ),
+                        fallback:(context)=> Center(child: CircularProgressIndicator(),)),
+
+                  ],
+                ),
               ),
             ),
           ),

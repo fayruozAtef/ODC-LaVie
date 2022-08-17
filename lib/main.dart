@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lavei/shared/component/constants.dart';
 import 'package:lavei/shared/network/local/cach_helper.dart';
 import 'package:lavei/shared/network/remote/dio_helper.dart';
 import 'package:lavei/shared/style/block_observer.dart';
@@ -16,6 +17,8 @@ Future<void> main() async {
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
+  TOKEN=CashHelper.getData(key: 'TOKEN');
+  print("Token is --> "+TOKEN!);
   runApp(const MyApp());
 
 }
@@ -23,7 +26,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,11 +38,9 @@ class MyApp extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.black),
           titleTextStyle: const TextStyle(
             color: Colors.black,
-            fontFamily: 'Jannah',
             fontWeight: FontWeight.bold,
             fontSize: 25.0,
           ),
-          backwardsCompatibility: false,
           color: Colors.white,
           elevation: 0.0,
           systemOverlayStyle: SystemUiOverlayStyle(

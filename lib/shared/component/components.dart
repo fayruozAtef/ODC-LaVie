@@ -26,7 +26,7 @@ PreferredSizeWidget defaultAppBar({
 })=>AppBar(
   titleSpacing: 5.0,
   title: Text(
-    title ?? '',
+    title ?? '',style: GoogleFonts.roboto(),
   ),
   actions: action,
 );
