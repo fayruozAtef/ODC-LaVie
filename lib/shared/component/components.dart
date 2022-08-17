@@ -40,6 +40,7 @@ Widget defaultTextFormField({
   required String?Function(String?) validate,
   required String lable,
   IconData? icon,
+  double width=double.infinity,
   IconData? sufixIcon,
   VoidCallback? suffixWork,
 })=>SizedBox(
