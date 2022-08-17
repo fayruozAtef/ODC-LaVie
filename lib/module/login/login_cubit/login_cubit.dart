@@ -48,4 +48,26 @@ class LoginCubit extends Cubit<LoginStates>{
           emit(LoginWithEmailAndPasswordErrorState(errorText: error.toString()));
         });
   }
+
+  void createUserWithEmailAndPassword({required String email, required String password,required String firstName, required String lastName}){
+    emit(CreateUserWithEmailAndPasswordLoadingState());
+    DioHelper.postData(
+        url: "/api/v1/auth/signup",
+        data: {
+          'email':email,
+          'password':password,
+          'firstName':firstName,
+          'lastName':lastName,
+        }
+    )
+        .then((value){
+      loginModel=LoginModel.fromJson(value.data);
+      CashHelper.saveData(key: 'TOKEN', value: loginModel!.data!.accessToken!);
+      emit(CreateUserWithEmailAndPasswordSuccessState());
+    })
+        .catchError((error){
+      print("error login --> "+error.toString());
+      emit(CreateUserWithEmailAndPasswordErrorState(errorText: error.toString()));
+    });
+  }
 }
