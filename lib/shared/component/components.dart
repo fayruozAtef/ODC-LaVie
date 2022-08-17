@@ -41,7 +41,7 @@ Widget defaultTextFormField({
   IconData? sufixIcon,
   VoidCallback? suffixWork,
 })=>SizedBox(
-  height: 47.0,
+  height: 50.0,
   child: TextFormField(
     controller: controler,
     keyboardType: input,
@@ -49,6 +49,7 @@ Widget defaultTextFormField({
     onFieldSubmitted: onSubmitted,
     onChanged: onChange,
     validator: validate,
+    style: TextStyle(height: 1.0),
     decoration: InputDecoration(
       labelText: lable,
       border: OutlineInputBorder(),
@@ -59,7 +60,7 @@ Widget defaultTextFormField({
 Widget defaultButton({
   required VoidCallback  function,
   double width=double.infinity,
-  double height=46.0,
+  double height=50.0,
   double textSize=16.0,
   Color color=defaultColor,
   required String text,
@@ -86,6 +87,4 @@ Widget defaultButton({
   ),
 );
 
-Widget mySpace()=>const SizedBox(height: 25.0,);
-
-Widget myLine()=>Container(height: 2.0,color: Colors.grey[300],);
+Widget mySpace()=>const SizedBox(height: 20.0,);

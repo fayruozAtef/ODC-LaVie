@@ -9,6 +9,7 @@ class SignUpScreen extends StatelessWidget {
   var formKey= GlobalKey<FormState>();
   var firstNameController= TextEditingController();
   var lastNameController= TextEditingController();
+  var emailController= TextEditingController();
   var passwordController= TextEditingController();
   var passwordConfirmController= TextEditingController();
 
@@ -62,6 +63,24 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   mySpace(),
                   Text(
+                    'Email',
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
+                    ),
+                  ),
+                  const SizedBox(height: 2.0,),
+                  defaultTextFormField(
+                    controler: emailController,
+                    input: TextInputType.emailAddress,
+                    validate: (value){
+                      if(value!.isEmpty){
+                        return 'Enter your email';
+                      }
+                    },
+                    lable: '',
+                  ),
+                  mySpace(),
+                  Text(
                     'Password',
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(color: HexColor('#6F6F6F'),fontSize: 14.0),
@@ -91,7 +110,7 @@ class SignUpScreen extends StatelessWidget {
                     input: TextInputType.text,
                     validate: (value){
                       if(value!.isEmpty){
-                        return 'Enter your password';
+                        return 'Confirm your password';
                       }
                       if(value !=passwordController.text){
                         return "this password doesn't match the above one";
