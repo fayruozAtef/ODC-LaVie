@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lavei/module/login/login_cubit/login_cubit.dart';
 import 'package:lavei/shared/component/components.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -61,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                   defaultButton(
                       function: (){
                         if(formKey.currentState!.validate()){
-
+                          LoginCubit.get(context).loginWithEmailAndPassword(email: emailController.text, password: passwordController.text);
                         }
                       },
                       text: 'Login'

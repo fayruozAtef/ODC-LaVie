@@ -5,7 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lavei/module/login/login_cubit/login_cubit.dart';
 import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/style/colors.dart';
-
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../../module/login/login_cubit/login_states.dart';
 
 class LoginLayout extends StatelessWidget {
@@ -53,6 +53,16 @@ class LoginLayout extends StatelessWidget {
                             length: 2,
                             initialIndex: LoginCubit.get(context).currentIndex,
                             child: TabBar(
+                              indicator:  MaterialIndicator(
+                                height: 2,
+                                topLeftRadius: 0,
+                                topRightRadius: 0,
+                                bottomLeftRadius: 2,
+                                bottomRightRadius: 2,
+                                color: defaultColor,
+                                horizontalPadding: 75.0,
+                                tabPosition: TabPosition.bottom,
+                              ),
                                 unselectedLabelColor: Colors.grey,
                                 labelColor: defaultColor,
                                 labelStyle: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18.0,)),
@@ -64,6 +74,7 @@ class LoginLayout extends StatelessWidget {
                                   Tab( text: 'Login',),
                                 ]
                             ),
+
                           ),
                           Expanded(
                             child: Container(
@@ -99,7 +110,7 @@ class LoginLayout extends StatelessWidget {
 
                                           },
                                         ),
-                                        const SizedBox(width: 10.0,),
+                                        const SizedBox(width: 20.0,),
                                         IconButton(
                                           icon: Image(image: AssetImage('assets/images/facebook.png'),),
                                           iconSize: 25,
@@ -107,7 +118,6 @@ class LoginLayout extends StatelessWidget {
 
                                           },
                                         ),
-
                                       ],
                                     )
                                   ],
@@ -138,14 +148,12 @@ class LoginLayout extends StatelessWidget {
                       Spacer(),
                       Container(
                         width: double.infinity,
-                        child: Stack(
+                        child: Align(
                           alignment: Alignment.bottomLeft,
-                          children:const [
-                            Image(
-                              image: AssetImage('assets/images/img_2.png'),
-                              width: 160.0,
-                            ),
-                          ],
+                          child: Image(
+                            image: AssetImage('assets/images/img_2.png'),
+                            width: 160.0,
+                          ),
                         ),
                       ),
                     ],

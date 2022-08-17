@@ -52,6 +52,7 @@ Widget defaultTextFormField({
     style: TextStyle(height: 1.0),
     decoration: InputDecoration(
       labelText: lable,
+      errorStyle: TextStyle(height: 0.2),
       border: OutlineInputBorder(),
     ),
   ),

@@ -1,8 +1,10 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lavei/shared/network/local/cach_helper.dart';
+import 'package:lavei/shared/network/remote/dio_helper.dart';
 import 'package:lavei/shared/style/block_observer.dart';
 import 'package:lavei/shared/style/colors.dart';
 import 'package:page_transition/page_transition.dart';
@@ -13,6 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
+  DioHelper.init();
   runApp(const MyApp());
 
 }
