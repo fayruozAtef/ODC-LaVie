@@ -8,4 +8,7 @@ class LoginWithEmailAndPasswordLoadingState extends LoginStates{}
 
 class LoginWithEmailAndPasswordSuccessState extends LoginStates{}
 
-class LoginWithEmailAndPasswordErrorState extends LoginStates{}
+class LoginWithEmailAndPasswordErrorState extends LoginStates{
+  String errorText;
+  LoginWithEmailAndPasswordErrorState({required this.errorText});
+}

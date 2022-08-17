@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../style/colors.dart';
 
@@ -49,10 +51,10 @@ Widget defaultTextFormField({
     onFieldSubmitted: onSubmitted,
     onChanged: onChange,
     validator: validate,
-    style: TextStyle(height: 1.0),
+    style: GoogleFonts.roboto(textStyle:TextStyle(height: 1.0, color: Colors.black.withOpacity(.8))),
     decoration: InputDecoration(
       labelText: lable,
-      errorStyle: TextStyle(height: 0.2),
+      errorStyle: TextStyle(height: 0.3),
       border: OutlineInputBorder(),
     ),
   ),
@@ -89,3 +91,36 @@ Widget defaultButton({
 );
 
 Widget mySpace()=>const SizedBox(height: 20.0,);
+
+enum ToastStates {SUCCESS, ERROR, WARNING}
+
+void showToast({
+  required String? messege,
+  required ToastStates state,
+
+})=>Fluttertoast.showToast(
+    msg: "${messege}",
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 5,
+    backgroundColor: chooseToastColor(state),
+    textColor: Colors.white,
+    fontSize: 16.0
+);
+
+Color chooseToastColor(ToastStates state){
+  Color color;
+  switch(state){
+    case ToastStates.SUCCESS:
+      color = Colors.green;
+      break;
+    case ToastStates.ERROR:
+      color = Colors.red;
+      break;
+    case ToastStates.WARNING:
+      color = Colors.amber;
+      break;
+  }
+  return color;
+}
+

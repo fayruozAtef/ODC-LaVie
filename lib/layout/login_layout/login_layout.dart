@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lavei/layout/lavie_layout/lavie_layout_screen.dart';
 import 'package:lavei/module/login/login_cubit/login_cubit.dart';
 import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/style/colors.dart';
@@ -15,7 +17,18 @@ class LoginLayout extends StatelessWidget {
     return BlocProvider(
         create: (BuildContext context)=>LoginCubit(),
       child: BlocConsumer<LoginCubit,LoginStates>(
-        listener: (context, state){},
+        listener: (context, state){
+          if(state is LoginWithEmailAndPasswordSuccessState){
+            navigateAndDelete(context, LavieLayoutScreen());
+          }
+          if(state is LoginWithEmailAndPasswordErrorState){
+            if(state.errorText.contains('Http status error [400]')) {
+              showToast(
+                  messege: "Wrong email and password",
+                  state: ToastStates.ERROR);
+            }
+          }
+        },
         builder: (context, state){
           return Scaffold(
             body: Container(

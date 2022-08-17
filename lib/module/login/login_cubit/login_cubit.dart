@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lavei/module/login/login_cubit/login_states.dart';
 import 'package:lavei/module/login/login_screen.dart';
 import 'package:lavei/module/sign_up/sign_up_screen.dart';
+import 'package:lavei/shared/component/components.dart';
+import 'package:lavei/shared/network/local/cach_helper.dart';
 import 'package:lavei/shared/network/remote/dio_helper.dart';
 
 import '../../../model/login_models/Login_Model.dart';
@@ -38,12 +40,12 @@ class LoginCubit extends Cubit<LoginStates>{
         )
         .then((value){
           loginModel=LoginModel.fromJson(value.data);
-          print("User Token --> "+loginModel!.data!.accessToken!);
+          CashHelper.saveData(key: 'TOKEN', value: loginModel!.data!.accessToken!);
           emit(LoginWithEmailAndPasswordSuccessState());
         })
         .catchError((error){
           print("error login --> "+error.toString());
-          emit(LoginWithEmailAndPasswordErrorState());
+          emit(LoginWithEmailAndPasswordErrorState(errorText: error.toString()));
         });
   }
 }
