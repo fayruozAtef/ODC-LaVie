@@ -7,6 +7,7 @@ import 'package:lavei/module/sign_up/sign_up_screen.dart';
 import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/network/local/cach_helper.dart';
 import 'package:lavei/shared/network/remote/dio_helper.dart';
+import 'package:lavei/shared/network/remote/end_points.dart';
 
 import '../../../model/login_models/Login_Model.dart';
 
@@ -32,7 +33,7 @@ class LoginCubit extends Cubit<LoginStates>{
   void loginWithEmailAndPassword({required String email, required String password}){
     emit(LoginWithEmailAndPasswordLoadingState());
     DioHelper.postData(
-        url: "/api/v1/auth/signin",
+        url: LOGIN,
         data: {
           'email':email,
           'password':password,
@@ -52,7 +53,7 @@ class LoginCubit extends Cubit<LoginStates>{
   void createUserWithEmailAndPassword({required String email, required String password,required String firstName, required String lastName}){
     emit(CreateUserWithEmailAndPasswordLoadingState());
     DioHelper.postData(
-        url: "/api/v1/auth/signup",
+        url: SIGNUP,
         data: {
           'email':email,
           'password':password,
