@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lavei/module/login/login_cubit/login_states.dart';
 import 'package:lavei/module/login/login_screen.dart';
 import 'package:lavei/module/sign_up/sign_up_screen.dart';
-import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/component/constants.dart';
 import 'package:lavei/shared/network/local/cach_helper.dart';
 import 'package:lavei/shared/network/remote/dio_helper.dart';
 import 'package:lavei/shared/network/remote/end_points.dart';
 
-import '../../../model/login_models/Login_Model.dart';
+import '../../../model/user_model/login_model.dart';
+
 
 class LoginCubit extends Cubit<LoginStates>{
 
