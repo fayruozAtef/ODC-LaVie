@@ -1,6 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lavei/shared/component/constants.dart';
@@ -9,6 +8,7 @@ import 'package:lavei/shared/network/remote/dio_helper.dart';
 import 'package:lavei/shared/style/block_observer.dart';
 import 'package:lavei/shared/style/colors.dart';
 import 'package:page_transition/page_transition.dart';
+import 'layout/lavie_layout/lavie_layout_screen.dart';
 import 'layout/login_layout/login_layout.dart';
 import 'module/splash/splash_screen.dart';
 
@@ -18,12 +18,17 @@ Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   CURRENT_TOKEN=CashHelper.getData(key: 'TOKEN');
-  runApp(const MyApp());
+  Widget widget=LoginLayout();
+  if(CURRENT_TOKEN==null){
+    widget=LavieLayoutScreen();
+  }
+  runApp(MyApp(widget: widget,));
 
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  Widget widget;
+  MyApp({Key? key, required this.widget}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +96,7 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
         duration: 5000,
         splash: SplashScreen(),
-        nextScreen: LoginLayout(),
+        nextScreen: widget,
         splashTransition: SplashTransition.slideTransition,
         pageTransitionType: PageTransitionType.bottomToTop,
       ),
