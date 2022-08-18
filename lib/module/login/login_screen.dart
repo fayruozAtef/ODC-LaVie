@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lavei/module/forget_password/forget_password_screen.dart';
 import 'package:lavei/module/login/login_cubit/login_cubit.dart';
 import 'package:lavei/module/login/login_cubit/login_states.dart';
 import 'package:lavei/shared/component/components.dart';
@@ -109,6 +110,7 @@ class LoginScreen extends StatelessWidget {
                         Spacer(),
                         TextButton(
                             onPressed: (){
+                              navigateTo(context, ForgetPasswordScreen());
                             },
                             child: Text(
                                 'Forget Password?',
