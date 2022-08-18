@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:lavei/layout/lavie_layout/cubit/cubit.dart';
+import 'package:lavei/shared/component/components.dart';
 
 import '../../shared/style/colors.dart';
 import 'cubit/states.dart';
 
 class LavieLayoutScreen extends StatelessWidget {
 
+  var searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
 
@@ -20,7 +23,7 @@ class LavieLayoutScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(),
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 children: [
                   Center(
@@ -44,7 +47,38 @@ class LavieLayoutScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width/4 *3 -10,
+                        child: TextFormField(
+                          controller: searchController,
+                          keyboardType: TextInputType.text,
+                          onFieldSubmitted: (value){},
+                          style: GoogleFonts.roboto(textStyle:TextStyle(height: 1.0, color: HexColor('#979797'))),
+                          decoration:  InputDecoration(
+                            labelText: 'Search',
+                            labelStyle: GoogleFonts.roboto(textStyle: TextStyle(color: HexColor('#979797'),fontSize: 16.0)),
+                            errorStyle: TextStyle(height: 0.3),
+                            prefixIcon: Icon(Icons.search_outlined),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 5.0,),
+                      Container(
+                        height: 58.0,
+                        width: 51.0,
+                        decoration: BoxDecoration(
+                          color: HexColor('#1ABC00'),
+                        ),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.shopping_cart_outlined)),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -70,7 +104,11 @@ class LavieLayoutScreen extends StatelessWidget {
                             heightFactor: 0.8,
                             child: FloatingActionButton(
                                 backgroundColor: defaultColor,
-                                child: Icon(Icons.home_outlined,size: 30.0,),
+                                child: new Image(
+                                  image: AssetImage('assets/images/home.png'),
+                                  height: 25,
+                                  width: 25,
+                                ),
                                 elevation: 0.1,
                                 onPressed: () {
 
@@ -83,9 +121,10 @@ class LavieLayoutScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 IconButton(
-                                  icon: Icon(
-                                    Icons.energy_savings_leaf_outlined,
-                                    size: 30.0,
+                                  icon:  new Image(
+                                    image: AssetImage('assets/images/leaf.png'),
+                                    height: 25,
+                                    width: 25,
                                     color: LaVieCubit.get(context).currentBottomNavBarIndex == 0 ? defaultColor : Colors.grey.shade400,
                                   ),
                                   onPressed: () {
@@ -93,9 +132,10 @@ class LavieLayoutScreen extends StatelessWidget {
                                   },
                                 ),
                                 IconButton(
-                                    icon: Icon(
-                                      Icons.qr_code_scanner_outlined,
-                                      size: 30.0,
+                                    icon: new Image(
+                                      image: AssetImage('assets/images/qr-code-scan.png'),
+                                      height: 25,
+                                      width: 25,
                                       color:LaVieCubit.get(context).currentBottomNavBarIndex == 1 ? defaultColor : Colors.grey.shade400,
                                     ),
                                     onPressed: () {
@@ -105,18 +145,20 @@ class LavieLayoutScreen extends StatelessWidget {
                                   width: size.width * 0.20,
                                 ),
                                 IconButton(
-                                    icon: Icon(
-                                      Icons.notifications_outlined,
-                                      size: 30.0,
+                                    icon: new Image(
+                                      image: AssetImage('assets/images/bell.png'),
+                                      height: 25,
+                                      width: 25,
                                       color:LaVieCubit.get(context).currentBottomNavBarIndex == 2 ? defaultColor : Colors.grey.shade400,
                                     ),
                                     onPressed: () {
                                       LaVieCubit.get(context).changeBottomNav(2);
                                     }),
                                 IconButton(
-                                    icon: Icon(
-                                      Icons.person_outline,
-                                      size: 30.0,
+                                    icon: new Image(
+                                      image: AssetImage('assets/images/user.png'),
+                                      height: 25,
+                                      width: 25,
                                       color:LaVieCubit.get(context).currentBottomNavBarIndex == 3 ? defaultColor : Colors.grey.shade400,
                                     ),
                                     onPressed: () {
