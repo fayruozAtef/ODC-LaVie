@@ -4,6 +4,8 @@ class LoginInitialState extends LoginStates{}
 
 class LoginAndSignUpSwap extends LoginStates{}
 
+class RememberMeChangeState extends LoginStates{}
+
 class LoginWithEmailAndPasswordLoadingState extends LoginStates{}
 
 class LoginWithEmailAndPasswordSuccessState extends LoginStates{}
@@ -12,6 +14,7 @@ class LoginWithEmailAndPasswordErrorState extends LoginStates{
   String errorText;
   LoginWithEmailAndPasswordErrorState({required this.errorText});
 }
+
 class CreateUserWithEmailAndPasswordLoadingState extends LoginStates{}
 
 class CreateUserWithEmailAndPasswordSuccessState extends LoginStates{}

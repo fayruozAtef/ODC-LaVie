@@ -17,8 +17,7 @@ Future<void> main() async {
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-  TOKEN=CashHelper.getData(key: 'TOKEN');
-  print("Token is --> "+TOKEN!);
+  CURRENT_TOKEN=CashHelper.getData(key: 'TOKEN');
   runApp(const MyApp());
 
 }

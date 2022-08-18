@@ -5,6 +5,7 @@ import 'package:lavei/module/login/login_cubit/login_states.dart';
 import 'package:lavei/module/login/login_screen.dart';
 import 'package:lavei/module/sign_up/sign_up_screen.dart';
 import 'package:lavei/shared/component/components.dart';
+import 'package:lavei/shared/component/constants.dart';
 import 'package:lavei/shared/network/local/cach_helper.dart';
 import 'package:lavei/shared/network/remote/dio_helper.dart';
 import 'package:lavei/shared/network/remote/end_points.dart';
@@ -20,6 +21,7 @@ class LoginCubit extends Cubit<LoginStates>{
   static LoginCubit get(context)=>BlocProvider.of(context);
 
   int currentIndex=1;
+  bool rememberMe=false;
   List<Widget> screens=[
     SignUpScreen(),
     LoginScreen(),
@@ -28,6 +30,11 @@ class LoginCubit extends Cubit<LoginStates>{
   void swapLoginAndSignUp(int index){
     currentIndex=index;
     emit(LoginAndSignUpSwap());
+  }
+
+  void changeRememberMeState(){
+    rememberMe=!rememberMe;
+    emit(RememberMeChangeState());
   }
 
   void loginWithEmailAndPassword({required String email, required String password}){
@@ -41,8 +48,12 @@ class LoginCubit extends Cubit<LoginStates>{
         )
         .then((value){
           loginModel=LoginModel.fromJson(value.data);
-          CashHelper.saveData(key: 'TOKEN', value: loginModel!.data!.accessToken!);
-          emit(LoginWithEmailAndPasswordSuccessState());
+          CURRENT_TOKEN=loginModel!.data!.accessToken!;
+          REFRECH_TOKEN=loginModel!.data!.refreshToken!;
+          if(rememberMe) {
+            CashHelper.saveData(key: 'TOKEN', value: loginModel!.data!.accessToken!);
+          }
+      emit(LoginWithEmailAndPasswordSuccessState());
         })
         .catchError((error){
           print("error login --> "+error.toString());
@@ -63,7 +74,8 @@ class LoginCubit extends Cubit<LoginStates>{
     )
         .then((value){
       loginModel=LoginModel.fromJson(value.data);
-      CashHelper.saveData(key: 'TOKEN', value: loginModel!.data!.accessToken!);
+      CURRENT_TOKEN=loginModel!.data!.accessToken!;
+      REFRECH_TOKEN=loginModel!.data!.refreshToken!;
       emit(CreateUserWithEmailAndPasswordSuccessState());
     })
         .catchError((error){

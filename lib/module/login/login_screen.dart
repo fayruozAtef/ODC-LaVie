@@ -69,6 +69,53 @@ class LoginScreen extends StatelessWidget {
                       },
                       lable: '',
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        TextButton(
+                            onPressed: (){
+                              LoginCubit.get(context).changeRememberMeState();
+                            },
+                            child: Row(
+                                textBaseline: TextBaseline.alphabetic,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                      height: 20.0,
+                                      width: 20.0,
+                                      child: Checkbox(
+                                          value: LoginCubit.get(context).rememberMe,
+                                          onChanged: (value){
+
+                                          }
+                                      )
+                                  ),
+                                  // You can play with the width to adjust your
+                                  // desired spacing
+                                  SizedBox(width: 3.0),
+                                  Text(
+                                    "Remember me",
+                                    maxLines: 1,
+                                    style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                            fontSize: 13.0,
+                                            height: 1.0,
+                                            color: HexColor('#939393'))),
+                                  ),
+                                ]
+                            ),
+                        ),
+                        Spacer(),
+                        TextButton(
+                            onPressed: (){
+                            },
+                            child: Text(
+                                'Forget Password?',
+                              style: GoogleFonts.poppins(textStyle: TextStyle(fontSize: 14.0, height: 1.0 )),
+                            )),
+                      ],
+                    ),
                     mySpace(),
                     ConditionalBuilder(
                         condition: state is! LoginWithEmailAndPasswordLoadingState,
