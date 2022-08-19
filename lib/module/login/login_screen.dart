@@ -8,6 +8,8 @@ import 'package:lavei/module/login/login_cubit/login_cubit.dart';
 import 'package:lavei/module/login/login_cubit/login_states.dart';
 import 'package:lavei/shared/component/components.dart';
 
+import '../../shared/style/colors.dart';
+
 class LoginScreen extends StatelessWidget {
 
   var formKey= GlobalKey<FormState>();
@@ -127,7 +129,8 @@ class LoginScreen extends StatelessWidget {
                                 LoginCubit.get(context).loginWithEmailAndPassword(email: emailController.text, password: passwordController.text);
                               }
                             },
-                            text: 'Login'
+                            text: 'Login',
+                          color: lightGreen,
                         ),
                         fallback:(context)=> Center(child: CircularProgressIndicator(),)),
 

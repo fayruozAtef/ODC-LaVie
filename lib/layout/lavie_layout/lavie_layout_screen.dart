@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:lavei/layout/lavie_layout/cubit/cubit.dart';
-import 'package:lavei/shared/component/components.dart';
-
+import 'package:lavei/shared/component/constants.dart';
 import '../../shared/style/colors.dart';
 import 'cubit/states.dart';
 
@@ -50,19 +48,26 @@ class LavieLayoutScreen extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width/4 *3 -10,
-                        child: TextFormField(
-                          controller: searchController,
-                          keyboardType: TextInputType.text,
-                          onFieldSubmitted: (value){},
-                          style: GoogleFonts.roboto(textStyle:TextStyle(height: 1.0, color: HexColor('#979797'))),
-                          decoration:  InputDecoration(
-                            labelText: 'Search',
-                            labelStyle: GoogleFonts.roboto(textStyle: TextStyle(color: HexColor('#979797'),fontSize: 16.0)),
-                            errorStyle: TextStyle(height: 0.3),
-                            prefixIcon: Icon(Icons.search_outlined),
-                            border: OutlineInputBorder(),
+                      Expanded(
+                        child: Container(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          decoration: BoxDecoration(
+                            color: lightGrey,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: TextFormField(
+                            enableSuggestions: true,
+                            controller: searchController,
+                            keyboardType: TextInputType.text,
+                            onFieldSubmitted: (value){},
+                            style: GoogleFonts.roboto(textStyle:TextStyle(height: 1.0, color: textColor)),
+                            decoration:  InputDecoration(
+                              labelText: 'Search',
+                              labelStyle: GoogleFonts.roboto(textStyle: TextStyle(color:textColor,fontSize: 16.0)),
+                              errorStyle: TextStyle(height: 0.3),
+                              prefixIcon: Icon(Icons.search_outlined),
+                              border: InputBorder.none,
+                            ),
                           ),
                         ),
                       ),
@@ -71,14 +76,51 @@ class LavieLayoutScreen extends StatelessWidget {
                         height: 58.0,
                         width: 51.0,
                         decoration: BoxDecoration(
-                          color: HexColor('#1ABC00'),
+                          color: lightGreen,
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.shopping_cart_outlined)),
+                        child: IconButton(
+                          onPressed: () {
+
+                          },
+                          icon: const Image(
+                            image: AssetImage(
+                              'assets/images/cart.png',
+                            ),
+                            height: 30.0,
+                            width: 30.0,
+                          ),
+                        ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 5.0),
+                            child: categoryItem('All',(){}),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding:const  EdgeInsets.only(right: 5.0),
+                            child: categoryItem('Plants',(){}),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 5.0),
+                            child: categoryItem('Seeds',(){}),
+                          ),
+                        ),
+                        Expanded(child: categoryItem('Tools',(){})),
+
+                      ],
+                  ),
+
+
                 ],
               ),
             ),
@@ -103,7 +145,7 @@ class LavieLayoutScreen extends StatelessWidget {
                           Center(
                             heightFactor: 0.8,
                             child: FloatingActionButton(
-                                backgroundColor: defaultColor,
+                                backgroundColor: lightGreen,
                                 child: new Image(
                                   image: AssetImage('assets/images/home.png'),
                                   height: 25,
@@ -111,7 +153,7 @@ class LavieLayoutScreen extends StatelessWidget {
                                 ),
                                 elevation: 0.1,
                                 onPressed: () {
-
+                                  LaVieCubit.get(context).changeBottomNav(-1);
                                 }),
                           ),
                           Container(
@@ -121,22 +163,22 @@ class LavieLayoutScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 IconButton(
-                                  icon:  new Image(
+                                  icon: Image(
                                     image: AssetImage('assets/images/leaf.png'),
                                     height: 25,
                                     width: 25,
-                                    color: LaVieCubit.get(context).currentBottomNavBarIndex == 0 ? defaultColor : Colors.grey.shade400,
+                                    color: LaVieCubit.get(context).currentBottomNavBarIndex == 0 ? lightGreen : Colors.grey.shade400,
                                   ),
                                   onPressed: () {
                                     LaVieCubit.get(context).changeBottomNav(0);
                                   },
                                 ),
                                 IconButton(
-                                    icon: new Image(
+                                    icon: Image(
                                       image: AssetImage('assets/images/qr-code-scan.png'),
                                       height: 25,
                                       width: 25,
-                                      color:LaVieCubit.get(context).currentBottomNavBarIndex == 1 ? defaultColor : Colors.grey.shade400,
+                                      color:LaVieCubit.get(context).currentBottomNavBarIndex == 1 ? lightGreen : Colors.grey.shade400,
                                     ),
                                     onPressed: () {
                                       LaVieCubit.get(context).changeBottomNav(1);
@@ -145,21 +187,21 @@ class LavieLayoutScreen extends StatelessWidget {
                                   width: size.width * 0.20,
                                 ),
                                 IconButton(
-                                    icon: new Image(
+                                    icon: Image(
                                       image: AssetImage('assets/images/bell.png'),
                                       height: 25,
                                       width: 25,
-                                      color:LaVieCubit.get(context).currentBottomNavBarIndex == 2 ? defaultColor : Colors.grey.shade400,
+                                      color:LaVieCubit.get(context).currentBottomNavBarIndex == 2 ? lightGreen : Colors.grey.shade400,
                                     ),
                                     onPressed: () {
                                       LaVieCubit.get(context).changeBottomNav(2);
                                     }),
                                 IconButton(
-                                    icon: new Image(
+                                    icon: Image(
                                       image: AssetImage('assets/images/user.png'),
                                       height: 25,
                                       width: 25,
-                                      color:LaVieCubit.get(context).currentBottomNavBarIndex == 3 ? defaultColor : Colors.grey.shade400,
+                                      color:LaVieCubit.get(context).currentBottomNavBarIndex == 3 ? lightGreen : Colors.grey.shade400,
                                     ),
                                     onPressed: () {
                                       LaVieCubit.get(context).changeBottomNav(3);
@@ -208,4 +250,20 @@ class BNBCustomPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
+}
+
+Widget categoryItem(String title, VoidCallback onPressed){
+  return Container(
+      decoration: BoxDecoration(
+        color: lightGrey,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: MaterialButton(
+        onPressed: onPressed,
+        child: Text(
+          '$title',
+          style: GoogleFonts.roboto(
+              textStyle: TextStyle(fontSize: 16.0),color: lightGreen),
+        ),
+      ));
 }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,15 +23,29 @@ class LoginLayout extends StatelessWidget {
             navigateAndDelete(context, LavieLayoutScreen());
           }
           if(state is LoginWithEmailAndPasswordErrorState){
-            if(state.errorText.contains('Http status error [400]')) {
+            if(state.error is DioError) {
               showToast(
-                  messege: "Wrong email and password",
+                  messege: '${state.error.response!.data['message']}',
                   state: ToastStates.ERROR);
             }
           }
           if(state is CreateUserWithEmailAndPasswordSuccessState){
             showToast(messege: 'Successfully create new account', state: ToastStates.SUCCESS);
             navigateAndDelete(context, LavieLayoutScreen());
+          }
+          if(state is CreateUserWithEmailAndPasswordErrorState){
+            if(state.error is DioError) {
+              if(state.error.response!.data['message'] is String) {
+                showToast(
+                    messege: '${state.error.response!.data['message']}',
+                    state: ToastStates.ERROR);
+              }
+              else{
+                showToast(
+                    messege: '${state.error.response!.data['message'][state.error.response!.data['message'].length -1]}',
+                    state: ToastStates.ERROR);
+              }
+            }
           }
         },
         builder: (context, state){
@@ -81,7 +96,7 @@ class LoginLayout extends StatelessWidget {
                                 tabPosition: TabPosition.bottom,
                               ),
                                 unselectedLabelColor: Colors.grey,
-                                labelColor: defaultColor,
+                                labelColor: lightGreen,
                                 labelStyle: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18.0,)),
                                 onTap: (index){
                                   LoginCubit.get(context).swapLoginAndSignUp(index);

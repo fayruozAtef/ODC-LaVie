@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lavei/module/login/login_cubit/login_cubit.dart';
 
 import '../../shared/component/components.dart';
+import '../../shared/style/colors.dart';
 import '../login/login_cubit/login_states.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -123,6 +124,7 @@ class SignUpScreen extends StatelessWidget {
                           }
                         },
                         lable: '',
+                        isPassword:  true,
                       ),
                       mySpace(),
                       Text(
@@ -144,6 +146,7 @@ class SignUpScreen extends StatelessWidget {
                           }
                         },
                         lable: '',
+                        isPassword: true,
                       ),
                       mySpace(),
                       ConditionalBuilder(
@@ -159,7 +162,9 @@ class SignUpScreen extends StatelessWidget {
                                       lastName: lastNameController.text);
                                 }
                               },
-                              text: 'Login'),
+                              text: 'Login',
+                            color: lightGreen,
+                          ),
                           fallback: (context)=>Center(child: CircularProgressIndicator()))
 
                     ],

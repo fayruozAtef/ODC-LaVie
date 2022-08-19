@@ -8,10 +8,12 @@ class LaVieCubit extends Cubit<LaVieStates>{
 
   static LaVieCubit get(context)=>BlocProvider.of(context);
 
-  int currentBottomNavBarIndex=0;
+  int currentBottomNavBarIndex=-1;
 
   void changeBottomNav(int index){
     currentBottomNavBarIndex=index;
     emit(ChangeBottomNavBarState());
   }
+
+
 }

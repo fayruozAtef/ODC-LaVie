@@ -8,24 +8,28 @@ class CashHelper{
   }
 
   static dynamic getData({
-    required String key
+    required SharedKeys key
   })
   {
-    return  sharedPreferences!.get(key);
+    return  sharedPreferences!.get(key.name);
   }
 
   static Future<bool> saveData({
-    required String key,
+    required SharedKeys key,
     required dynamic value,
   }) async{
-    if(value is String) { return await sharedPreferences!.setString('$key', value); }
-    else if(value is int) { return await sharedPreferences!.setInt('$key', value); }
-    else if (value is double) { return await sharedPreferences!.setDouble('$key', value); }
-    return await sharedPreferences!.setBool('$key', value);
+    if(value is String) { return await sharedPreferences!.setString('${key.name}', value); }
+    else if(value is int) { return await sharedPreferences!.setInt('${key.name}', value); }
+    else if (value is double) { return await sharedPreferences!.setDouble('${key.name}', value); }
+    return await sharedPreferences!.setBool('${key.name}', value);
   }
 
-  static Future<bool> clearData({required String key,}) async{
-    return sharedPreferences!.remove(key);
+  static Future<bool> clearData({required SharedKeys key,}) async{
+    return sharedPreferences!.remove(key.name);
   }
 
+}
+
+enum SharedKeys{
+  CURRENT_API,
 }

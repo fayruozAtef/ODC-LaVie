@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lavei/module/login/login_cubit/login_states.dart';
@@ -51,14 +52,15 @@ class LoginCubit extends Cubit<LoginStates>{
           CURRENT_TOKEN=loginModel!.data!.accessToken!;
           REFRECH_TOKEN=loginModel!.data!.refreshToken!;
           if(rememberMe) {
-            CashHelper.saveData(key: 'TOKEN', value: loginModel!.data!.accessToken!);
+            CashHelper.saveData(key: SharedKeys.CURRENT_API, value: loginModel!.data!.accessToken!);
           }
       emit(LoginWithEmailAndPasswordSuccessState());
         })
         .catchError((error){
           print("error login --> "+error.toString());
-          emit(LoginWithEmailAndPasswordErrorState(errorText: error.toString()));
-        });
+          emit(LoginWithEmailAndPasswordErrorState(error: error));
+
+    });
   }
 
   void createUserWithEmailAndPassword({required String email, required String password,required String firstName, required String lastName}){
@@ -72,15 +74,18 @@ class LoginCubit extends Cubit<LoginStates>{
           'lastName':lastName,
         }
     )
-        .then((value){
-      loginModel=LoginModel.fromJson(value.data);
-      CURRENT_TOKEN=loginModel!.data!.accessToken!;
-      REFRECH_TOKEN=loginModel!.data!.refreshToken!;
-      emit(CreateUserWithEmailAndPasswordSuccessState());
-    })
-        .catchError((error){
-      print("error login --> "+error.toString());
-      emit(CreateUserWithEmailAndPasswordErrorState(errorText: error.toString()));
+        .then((value) {
+          loginModel = LoginModel.fromJson(value.data);
+          CURRENT_TOKEN = loginModel!.data!.accessToken!;
+          REFRECH_TOKEN = loginModel!.data!.refreshToken!;
+          emit(CreateUserWithEmailAndPasswordSuccessState());
+        }).
+    catchError((error) {
+      print("error login --> " + error.toString());
+      if(error is DioError){
+
+      }
+      emit(CreateUserWithEmailAndPasswordErrorState(error: error));
     });
   }
 }

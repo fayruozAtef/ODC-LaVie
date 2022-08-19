@@ -11,8 +11,8 @@ class LoginWithEmailAndPasswordLoadingState extends LoginStates{}
 class LoginWithEmailAndPasswordSuccessState extends LoginStates{}
 
 class LoginWithEmailAndPasswordErrorState extends LoginStates{
-  String errorText;
-  LoginWithEmailAndPasswordErrorState({required this.errorText});
+  dynamic error;
+  LoginWithEmailAndPasswordErrorState({required this.error});
 }
 
 class CreateUserWithEmailAndPasswordLoadingState extends LoginStates{}
@@ -20,8 +20,8 @@ class CreateUserWithEmailAndPasswordLoadingState extends LoginStates{}
 class CreateUserWithEmailAndPasswordSuccessState extends LoginStates{}
 
 class CreateUserWithEmailAndPasswordErrorState extends LoginStates{
-  String errorText;
-  CreateUserWithEmailAndPasswordErrorState({required this.errorText});
+  dynamic error;
+  CreateUserWithEmailAndPasswordErrorState({required this.error});
 }
 
 class ForgetPasswordLoadingState extends LoginStates{}
