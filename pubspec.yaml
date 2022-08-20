@@ -46,6 +46,7 @@ dependencies:
   tab_indicator_styler: ^2.0.0
   fluttertoast: ^8.0.9
   conditional_builder_null_safety: ^0.0.6
+  curved_nav_bar: ^0.0.2
 
 dev_dependencies:
   flutter_test:

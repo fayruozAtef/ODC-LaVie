@@ -9,3 +9,5 @@ class GetAllProductLoadingState extends LaVieStates{}
 class GetAllProductSuccessState extends LaVieStates{}
 
 class GetAllProductErrorState extends LaVieStates{}
+
+class ChangeCountOfProductState extends LaVieStates{}

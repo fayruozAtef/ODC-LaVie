@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../model/product_model/Data.dart';
 import '../style/colors.dart';
 
 void navigateTo(context, widget) => Navigator.push(
@@ -124,75 +125,111 @@ Color chooseToastColor(ToastStates state){
   return color;
 }
 
-Widget productItem(){
+Widget productItem({
+  required Data data,
+  required VoidCallback decreaseFunction,
+  required VoidCallback increaseFunction,
+  required VoidCallback addToCartFunction,
+  int count=1,
+}){
   return Container(
     color: Colors.white,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Image(
-                image: NetworkImage(''),
-                width: 210.0,
-                height: 210.0,
-                //fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(end:8.0),
-              child: Row(
-                children: [
-                  Container(
-                    color: lightGrey,
-                    width: 30.0,
-                    height: 30.0,
-                    child: MaterialButton(
-                      onPressed: (){},
-                      child: Text('-'),
-                    ),
-                  ),
-                  Text('1'),
-                  Container(
-                    color: lightGrey,
-                    width: 30.0,
-                    height: 30.0,
-                    child: MaterialButton(
-                      height: 30.0,
-                      minWidth: 10.0,
-                      onPressed: (){},
-                      child: Text('+'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          height: 325.0,
+          child: Stack(
             children: [
-              Text(
-                'name',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 16.0,)),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 260.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 4.0, // shadow direction: bottom right
+                      )
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${data.name}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 16.0,)),
+                            ),
+                            Text(
+                              'Price: ${data.price}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12.0,)),
+                            ),
+                            const SizedBox(height: 10.0,),
+                            defaultButton(function: addToCartFunction, text: 'Add to cart',height: 35.0),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              Text(
-                'Price:',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12.0,)),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Stack(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Image(
+                            image: AssetImage('assets/images/plant.png'),
+                            width: 210.0,
+                            height: 210.0,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(end:8.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                color: lightGrey,
+                                width: 25.0,
+                                height: 25.0,
+                                child: IconButton(onPressed: decreaseFunction, icon: Image(image: AssetImage('assets/images/minus.png'),),),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                                child: Text('$count',style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 16.0,height: 0.8,)),),
+                              ),
+                              Container(
+                                color: lightGrey,
+                                width: 25.0,
+                                height: 25.0,
+                                child: IconButton(onPressed: increaseFunction, icon: Image(image: AssetImage('assets/images/plus.png'),),),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 10.0,),
-              defaultButton(function: (){}, text: 'Add to cart',height: 35.0),
             ],
           ),
-        ),
+        )
       ],
     ),
   );
