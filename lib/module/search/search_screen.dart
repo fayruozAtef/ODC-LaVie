@@ -8,18 +8,19 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: [
+            Container(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               decoration: BoxDecoration(
                 color: lightGrey,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
-                enableSuggestions: true,
                 controller: searchController,
                 keyboardType: TextInputType.text,
                 onFieldSubmitted: (value){},
@@ -33,8 +34,8 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

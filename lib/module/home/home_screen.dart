@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lavei/layout/lavie_layout/cubit/states.dart';
+import 'package:lavei/module/search/search_screen.dart';
 import '../../layout/lavie_layout/cubit/cubit.dart';
 import '../../shared/component/components.dart';
 import '../../shared/style/colors.dart';
@@ -44,21 +45,26 @@ class HomeScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Container(
-                        height: 46.0,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        decoration: BoxDecoration(
-                          color: lightGrey,
-                          borderRadius: BorderRadius.circular(10.0),
+                      child: InkWell(
+                        onTap: (){
+                          navigateTo(context, SearchScreen());
+                        },
+                        child: Container(
+                          height: 46.0,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          decoration: BoxDecoration(
+                            color: lightGrey,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Icon(Icons.search_outlined,color: textColor,),
+                              ),
+                              Text('Search',style:GoogleFonts.roboto(textStyle: TextStyle(color:textColor,fontSize: 16.0)),)
+                            ],),
                         ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Icon(Icons.search_outlined,color: textColor,),
-                            ),
-                            Text('Search',style:GoogleFonts.roboto(textStyle: TextStyle(color:textColor,fontSize: 16.0)),)
-                          ],),
                       ),
                     ),
                     const SizedBox(width: 5.0,),
