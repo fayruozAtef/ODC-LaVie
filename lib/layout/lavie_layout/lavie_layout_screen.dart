@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lavei/layout/lavie_layout/cubit/cubit.dart';
+import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/component/constants.dart';
 import '../../shared/style/colors.dart';
 import 'cubit/states.dart';
@@ -22,106 +23,116 @@ class LavieLayoutScreen extends StatelessWidget {
             appBar: AppBar(),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: [
-                  Center(
-                    child: Stack(
-                      alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Center(
+                      child: Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          Text(
+                            'La  Vie',
+                            style: GoogleFonts.meddon(
+                              textStyle: TextStyle(fontSize: 27.0,color: Colors.black),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsetsDirectional.only(top: 14.0),
+                            child: SizedBox(
+                              width: 23.0,
+                              height: 15.04,
+                              child: Image(image: AssetImage('assets/images/img.png')),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text(
-                          'La  Vie',
-                          style: GoogleFonts.meddon(
-                            textStyle: TextStyle(fontSize: 27.0,color: Colors.black),
+                        Expanded(
+                          child: Container(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            decoration: BoxDecoration(
+                              color: lightGrey,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: TextFormField(
+                              enableSuggestions: true,
+                              controller: searchController,
+                              keyboardType: TextInputType.text,
+                              onFieldSubmitted: (value){},
+                              style: GoogleFonts.roboto(textStyle:TextStyle(height: 1.0, color: textColor)),
+                              decoration:  InputDecoration(
+                                labelText: 'Search',
+                                labelStyle: GoogleFonts.roboto(textStyle: TextStyle(color:textColor,fontSize: 16.0)),
+                                errorStyle: TextStyle(height: 0.3),
+                                prefixIcon: Icon(Icons.search_outlined),
+                                border: InputBorder.none,
+                              ),
+                            ),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsetsDirectional.only(top: 14.0),
-                          child: SizedBox(
-                            width: 23.0,
-                            height: 15.04,
-                            child: Image(image: AssetImage('assets/images/img.png')),
+                        const SizedBox(width: 5.0,),
+                        Container(
+                          height: 58.0,
+                          width: 51.0,
+                          decoration: BoxDecoration(
+                            color: lightGreen,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              print('Current Token --->'+CURRENT_TOKEN!);
+                              LaVieCubit.get(context).getAllProducts();
+                            },
+                            icon: const Image(
+                              image: AssetImage(
+                                'assets/images/cart.png',
+                              ),
+                              height: 30.0,
+                              width: 30.0,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                            color: lightGrey,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: TextFormField(
-                            enableSuggestions: true,
-                            controller: searchController,
-                            keyboardType: TextInputType.text,
-                            onFieldSubmitted: (value){},
-                            style: GoogleFonts.roboto(textStyle:TextStyle(height: 1.0, color: textColor)),
-                            decoration:  InputDecoration(
-                              labelText: 'Search',
-                              labelStyle: GoogleFonts.roboto(textStyle: TextStyle(color:textColor,fontSize: 16.0)),
-                              errorStyle: TextStyle(height: 0.3),
-                              prefixIcon: Icon(Icons.search_outlined),
-                              border: InputBorder.none,
+                    const SizedBox(height: 20,),
+                    Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5.0),
+                              child: categoryItem('All',(){}),
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(width: 5.0,),
-                      Container(
-                        height: 58.0,
-                        width: 51.0,
-                        decoration: BoxDecoration(
-                          color: lightGreen,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-
-                          },
-                          icon: const Image(
-                            image: AssetImage(
-                              'assets/images/cart.png',
+                          Expanded(
+                            child: Padding(
+                              padding:const  EdgeInsets.only(right: 5.0),
+                              child: categoryItem('Plants',(){}),
                             ),
-                            height: 30.0,
-                            width: 30.0,
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20,),
-                  Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 5.0),
-                            child: categoryItem('All',(){}),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5.0),
+                              child: categoryItem('Seeds',(){}),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding:const  EdgeInsets.only(right: 5.0),
-                            child: categoryItem('Plants',(){}),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 5.0),
-                            child: categoryItem('Seeds',(){}),
-                          ),
-                        ),
-                        Expanded(child: categoryItem('Tools',(){})),
+                          Expanded(child: categoryItem('Tools',(){})),
 
-                      ],
-                  ),
-
-
-                ],
+                        ],
+                    ),
+                    const SizedBox(height: 20.0,),
+                    GridView.count(
+                        crossAxisCount: 2,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      mainAxisSpacing: 3.0,
+                      crossAxisSpacing: 3.0,
+                      children: List.generate(6, (index) => productItem()),
+                    ),
+                  ],
+                ),
               ),
             ),
             bottomNavigationBar: Container(
@@ -133,6 +144,7 @@ class LavieLayoutScreen extends StatelessWidget {
                     bottom: 0,
                     left: 0,
                     child: Container(
+                      color: Colors.transparent,
                       width: size.width,
                       height: 70,
                       child: Stack(
@@ -158,6 +170,7 @@ class LavieLayoutScreen extends StatelessWidget {
                           ),
                           Container(
                             width: size.width,
+                            color: Colors.transparent,
                             height: 70,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -184,6 +197,7 @@ class LavieLayoutScreen extends StatelessWidget {
                                       LaVieCubit.get(context).changeBottomNav(1);
                                     }),
                                 Container(
+                                  color: Colors.transparent,
                                   width: size.width * 0.20,
                                 ),
                                 IconButton(
@@ -267,3 +281,4 @@ Widget categoryItem(String title, VoidCallback onPressed){
         ),
       ));
 }
+

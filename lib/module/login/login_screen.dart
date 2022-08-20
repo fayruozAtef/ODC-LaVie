@@ -130,7 +130,6 @@ class LoginScreen extends StatelessWidget {
                               }
                             },
                             text: 'Login',
-                          color: lightGreen,
                         ),
                         fallback:(context)=> Center(child: CircularProgressIndicator(),)),
 

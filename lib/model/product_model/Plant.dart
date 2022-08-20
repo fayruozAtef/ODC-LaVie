@@ -17,13 +17,13 @@ class Plant {
     sunLight = json['sunLight'];
     temperature = json['temperature'];
   }
-  String plantId;
-  String name;
-  String description;
-  String imageUrl;
-  int waterCapacity;
-  int sunLight;
-  int temperature;
+  String? plantId;
+  String? name;
+  String? description;
+  String? imageUrl;
+  int? waterCapacity;
+  int? sunLight;
+  int? temperature;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

@@ -25,15 +25,15 @@ class Data {
     plant = json['plant'] != null ? Plant.fromJson(json['plant']) : null;
     tool = json['tool'];
   }
-  String productId;
-  String name;
-  String description;
-  String imageUrl;
-  String type;
-  int price;
-  bool available;
+  String? productId;
+  String? name;
+  String? description;
+  String? imageUrl;
+  String? type;
+  int? price;
+  bool? available;
   dynamic seed;
-  Plant plant;
+  Plant? plant;
   dynamic tool;
 
   Map<String, dynamic> toJson() {
@@ -47,7 +47,7 @@ class Data {
     map['available'] = available;
     map['seed'] = seed;
     if (plant != null) {
-      map['plant'] = plant.toJson();
+      map['plant'] = plant!.toJson();
     }
     map['tool'] = tool;
     return map;

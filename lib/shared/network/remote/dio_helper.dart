@@ -10,8 +10,22 @@ class DioHelper{
     );
   }
 
-  static Future<Response> getData({required String url, required Map<String,dynamic> query}) async{
-    return await dio!.get(url,queryParameters: query);
+  static Future<Response> getData({
+    required String url,
+    Map<String, dynamic>? query,
+    String token='',
+  }) async
+  {
+    dio!.options.headers =
+    {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+
+    return await dio!.get(
+      url,
+      queryParameters: query,
+    );
   }
 
   static Future<Response> postData({
@@ -22,7 +36,7 @@ class DioHelper{
     //Add More For the specified dio  baseOptions
     dio!.options.headers= {
       'Content-Type':'application/json',
-      //'Authorization': token,
+      'Authorization': token??'',
     };
     return dio!.post(
       url,

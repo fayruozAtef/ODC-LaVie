@@ -66,13 +66,12 @@ Widget defaultButton({
   double width=double.infinity,
   double height=50.0,
   double textSize=16.0,
-  Color color=defaultColor,
   required String text,
 })=>Container(
   width: width,
   height: height,
   decoration: BoxDecoration(
-    color: color,
+    color: lightGreen,
     borderRadius: BorderRadius.circular(7.0),
   ),
   child: MaterialButton(
@@ -123,5 +122,79 @@ Color chooseToastColor(ToastStates state){
       break;
   }
   return color;
+}
+
+Widget productItem(){
+  return Container(
+    color: Colors.white,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Image(
+                image: NetworkImage(''),
+                width: 210.0,
+                height: 210.0,
+                //fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(end:8.0),
+              child: Row(
+                children: [
+                  Container(
+                    color: lightGrey,
+                    width: 30.0,
+                    height: 30.0,
+                    child: MaterialButton(
+                      onPressed: (){},
+                      child: Text('-'),
+                    ),
+                  ),
+                  Text('1'),
+                  Container(
+                    color: lightGrey,
+                    width: 30.0,
+                    height: 30.0,
+                    child: MaterialButton(
+                      height: 30.0,
+                      minWidth: 10.0,
+                      onPressed: (){},
+                      child: Text('+'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'name',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 16.0,)),
+              ),
+              Text(
+                'Price:',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12.0,)),
+              ),
+              const SizedBox(height: 10.0,),
+              defaultButton(function: (){}, text: 'Add to cart',height: 35.0),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
