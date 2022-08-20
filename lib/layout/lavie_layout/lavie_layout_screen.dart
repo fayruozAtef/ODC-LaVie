@@ -9,8 +9,6 @@ class LavieLayoutScreen extends StatelessWidget {
   var searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
-    var size=MediaQuery.of(context).size ;
     return BlocProvider(
         create: (BuildContext context)=>LaVieCubit()..getAllProducts(),
       child: BlocConsumer<LaVieCubit,LaVieStates>(
@@ -18,7 +16,6 @@ class LavieLayoutScreen extends StatelessWidget {
         builder: (context, state){
           var cubit =LaVieCubit.get(context);
           return Scaffold(
-            appBar: AppBar(),
             body: cubit.screens[cubit.currentBottomNavBarIndex+1],
             floatingActionButton: FloatingActionButton(
               onPressed: (){

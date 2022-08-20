@@ -172,7 +172,7 @@ Widget productItem({
                               style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 16.0,)),
                             ),
                             Text(
-                              'Price: ${data.price}',
+                              '${data.price} EGP',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12.0,)),

@@ -47,6 +47,7 @@ dependencies:
   fluttertoast: ^8.0.9
   conditional_builder_null_safety: ^0.0.6
   curved_nav_bar: ^0.0.2
+  qr_code_scanner: ^1.0.1
 
 dev_dependencies:
   flutter_test:

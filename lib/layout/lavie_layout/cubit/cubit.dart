@@ -67,4 +67,5 @@ class LaVieCubit extends Cubit<LaVieStates>{
     emit(ChangeCountOfProductState());
 
   }
+
 }

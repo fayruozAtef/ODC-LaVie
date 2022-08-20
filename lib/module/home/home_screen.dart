@@ -16,108 +16,110 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<LaVieCubit,LaVieStates>(
       listener: (context,state){},
       builder: (context,state){
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Center(
-                  child: Stack(
-                    alignment: Alignment.topCenter,
+        return Scaffold(
+          appBar: AppBar(),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Center(
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        Text(
+                          'La  Vie',
+                          style: GoogleFonts.meddon(
+                            textStyle: TextStyle(fontSize: 27.0,color: Colors.black),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsetsDirectional.only(top: 14.0),
+                          child: SizedBox(
+                            width: 23.0,
+                            height: 15.04,
+                            child: Image(image: AssetImage('assets/images/img.png')),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        'La  Vie',
-                        style: GoogleFonts.meddon(
-                          textStyle: TextStyle(fontSize: 27.0,color: Colors.black),
+                      Expanded(
+                        child: InkWell(
+                          onTap: (){
+                            navigateTo(context, SearchScreen());
+                          },
+                          child: Container(
+                            height: 46.0,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            decoration: BoxDecoration(
+                              color: lightGrey,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Icon(Icons.search_outlined,color: textColor,),
+                                ),
+                                Text('Search',style:GoogleFonts.roboto(textStyle: TextStyle(color:textColor,fontSize: 16.0)),)
+                              ],),
+                          ),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsetsDirectional.only(top: 14.0),
-                        child: SizedBox(
-                          width: 23.0,
-                          height: 15.04,
-                          child: Image(image: AssetImage('assets/images/img.png')),
+                      const SizedBox(width: 5.0,),
+                      Container(
+                        height: 46.0,
+                        width: 48.0,
+                        decoration: BoxDecoration(
+                          color: lightGreen,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            navigateTo(context, CartScreen());
+                          },
+                          icon: const Image(
+                            image: AssetImage(
+                              'assets/images/cart.png',
+                            ),
+                            height: 30.0,
+                            width: 30.0,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: (){
-                          navigateTo(context, SearchScreen());
-                        },
-                        child: Container(
-                          height: 46.0,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                            color: lightGrey,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Icon(Icons.search_outlined,color: textColor,),
-                              ),
-                              Text('Search',style:GoogleFonts.roboto(textStyle: TextStyle(color:textColor,fontSize: 16.0)),)
-                            ],),
+                  const SizedBox(height: 20,),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 5.0),
+                          child: categoryItem('All',(){}),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 5.0,),
-                    Container(
-                      height: 46.0,
-                      width: 48.0,
-                      decoration: BoxDecoration(
-                        color: lightGreen,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          navigateTo(context, CartScreen());
-                        },
-                        icon: const Image(
-                          image: AssetImage(
-                            'assets/images/cart.png',
-                          ),
-                          height: 30.0,
-                          width: 30.0,
+                      Expanded(
+                        child: Padding(
+                          padding:const  EdgeInsets.only(right: 5.0),
+                          child: categoryItem('Plants',(){}),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 5.0),
-                        child: categoryItem('All',(){}),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 5.0),
+                          child: categoryItem('Seeds',(){}),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding:const  EdgeInsets.only(right: 5.0),
-                        child: categoryItem('Plants',(){}),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 5.0),
-                        child: categoryItem('Seeds',(){}),
-                      ),
-                    ),
-                    Expanded(child: categoryItem('Tools',(){})),
+                      Expanded(child: categoryItem('Tools',(){})),
 
-                  ],
-                ),
-                const SizedBox(height: 20.0,),
-                ConditionalBuilder(
+                    ],
+                  ),
+                  const SizedBox(height: 20.0,),
+                  ConditionalBuilder(
                     condition: state is! GetAllProductLoadingState,
                     builder: (context)=>GridView.count(
                       crossAxisCount: 2,
@@ -142,8 +144,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     fallback: (context)=>Center(child: CircularProgressIndicator(),),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
