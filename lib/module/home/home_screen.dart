@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lavei/layout/lavie_layout/cubit/states.dart';
+import 'package:lavei/module/cart/cart_screen.dart';
 import 'package:lavei/module/search/search_screen.dart';
 import '../../layout/lavie_layout/cubit/cubit.dart';
 import '../../shared/component/components.dart';
@@ -77,6 +78,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: IconButton(
                         onPressed: () {
+                          navigateTo(context, CartScreen());
                         },
                         icon: const Image(
                           image: AssetImage(
