@@ -33,6 +33,12 @@ class LaVieCubit extends Cubit<LaVieStates>{
     emit(ChangeBottomNavBarState());
   }
 
+  int currentCategoryIndex=0;
+
+  void changeCurrentCategory(int index){
+    currentCategoryIndex=index;
+    emit(ChangeCurrentCategoryState());
+  }
 
 
   List<Data> products=[];

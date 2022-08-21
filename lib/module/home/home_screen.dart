@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lavei/layout/lavie_layout/cubit/states.dart';
 import 'package:lavei/module/cart/cart_screen.dart';
 import 'package:lavei/module/search/search_screen.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../../layout/lavie_layout/cubit/cubit.dart';
 import '../../shared/component/components.dart';
 import '../../shared/style/colors.dart';
@@ -94,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20,),
-                  Row(
+                  /*Row(
                     children: [
                       Expanded(
                         child: Padding(
@@ -117,6 +118,31 @@ class HomeScreen extends StatelessWidget {
                       Expanded(child: categoryItem('Tools',(){})),
 
                     ],
+                  ),*/
+                  DefaultTabController(
+                    length: 4,
+                    initialIndex: LaVieCubit.get(context).currentCategoryIndex,
+                    child: TabBar(
+                        indicator:  BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0), // Creates border
+                            //color: Colors.greenAccent
+                          border: Border.all(color: lightGreen,width: 2.0)
+                        )
+                        ,
+                        unselectedLabelColor: Colors.grey,
+                        labelColor: lightGreen,
+                        labelStyle: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 18.0,)),
+                        onTap: (index){
+                          LaVieCubit.get(context).changeCurrentCategory(index);
+                        },
+                        tabs: const[
+                          Tab(text: 'All',),
+                          Tab( text: 'Plants',),
+                          Tab( text: 'Seeds',),
+                          Tab( text: 'Tools',),
+                        ]
+                    ),
+
                   ),
                   const SizedBox(height: 20.0,),
                   ConditionalBuilder(
