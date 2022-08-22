@@ -1,7 +1,9 @@
+import 'package:auth/auth.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lavei/module/login/login_cubit/login_states.dart';
 import 'package:lavei/module/login/login_screen.dart';
 import 'package:lavei/module/sign_up/sign_up_screen.dart';
@@ -61,6 +63,18 @@ class LoginCubit extends Cubit<LoginStates>{
           emit(LoginWithEmailAndPasswordErrorState(error: error));
 
     });
+  }
+
+  void loginWithGoogleAccount() async{
+    emit(LoginWithGoogleAccountLoadingState());
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    print('Access Token --> '+googleAuth!.accessToken!);
   }
 
   void createUserWithEmailAndPassword({required String email, required String password,required String firstName, required String lastName}){

@@ -15,6 +15,15 @@ class LoginWithEmailAndPasswordErrorState extends LoginStates{
   LoginWithEmailAndPasswordErrorState({required this.error});
 }
 
+class LoginWithGoogleAccountLoadingState extends LoginStates{}
+
+class LoginWithGoogleAccountSuccessState extends LoginStates{}
+
+class LoginWithGoogleAccountErrorState extends LoginStates{
+  dynamic error;
+  LoginWithGoogleAccountErrorState({required this.error});
+}
+
 class CreateUserWithEmailAndPasswordLoadingState extends LoginStates{}
 
 class CreateUserWithEmailAndPasswordSuccessState extends LoginStates{}

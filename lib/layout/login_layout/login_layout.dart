@@ -139,7 +139,7 @@ class LoginLayout extends StatelessWidget {
                                           icon: Image(image: AssetImage('assets/images/google.png'),fit: BoxFit.fill,),
                                           iconSize: 25,
                                           onPressed: () {
-
+                                            LoginCubit.get(context).loginWithGoogleAccount();
                                           },
                                         ),
                                         const SizedBox(width: 20.0,),

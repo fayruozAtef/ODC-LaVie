@@ -7,9 +7,11 @@ import 'package:lavei/module/notification/notification_screen.dart';
 import 'package:lavei/module/plants/plants_screen.dart';
 import 'package:lavei/module/profile/profile_screen.dart';
 import 'package:lavei/shared/component/constants.dart';
+import 'package:lavei/shared/network/local/cach_helper.dart';
 import 'package:lavei/shared/network/remote/dio_helper.dart';
 import 'package:lavei/shared/network/remote/end_points.dart';
 import '../../../model/product_model/Data.dart';
+import '../../../model/product_model/Plant.dart';
 import '../../../module/scan_qr_code/scan_qr_code_screen.dart';
 
 class LaVieCubit extends Cubit<LaVieStates>{
@@ -38,18 +40,29 @@ class LaVieCubit extends Cubit<LaVieStates>{
   void changeCurrentCategory(int index){
     currentCategoryIndex=index;
     emit(ChangeCurrentCategoryState());
+    if(index==0) {
+      getAllProducts(GET_ALL_PRODUCT);
+    }
+    else if(index == 1){
+      getAllProducts(GET_ALL_PLANTS);
+    }
+    else if(index == 2){
+      getAllProducts(GET_ALL_SEEDS);
+    }
+    else if(index == 3){
+      getAllProducts(GET_ALL_TOOLS);
+    }
   }
-
 
   List<Data> products=[];
   List<int> counts=[];
   //AllProducts? allProducts;
-  void getAllProducts(){
+  void getAllProducts(String url){
     products=[];
     counts=[];
     emit(GetAllProductLoadingState());
     DioHelper.getData(
-        url: GET_ALL_PRODUCT,
+        url: url,
         token: CURRENT_TOKEN ?? "")
         .then((value) {
           //allProducts=AllProducts.fromJson(value.data);

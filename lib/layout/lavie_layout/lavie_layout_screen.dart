@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lavei/layout/lavie_layout/cubit/cubit.dart';
+import 'package:lavei/shared/network/remote/end_points.dart';
 import '../../shared/style/colors.dart';
 import 'cubit/states.dart';
 
@@ -10,7 +11,7 @@ class LavieLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (BuildContext context)=>LaVieCubit()..getAllProducts(),
+        create: (BuildContext context)=>LaVieCubit()..getAllProducts(GET_ALL_PRODUCT),
       child: BlocConsumer<LaVieCubit,LaVieStates>(
         listener: (context, state){},
         builder: (context, state){

@@ -17,10 +17,10 @@ Future<void> main() async {
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-  CURRENT_TOKEN=CashHelper.getData(key: SharedKeys.CURRENT_API);
+  CURRENT_TOKEN= CashHelper.getData(key: SharedKeys.CURRENT_API);
   Widget widget=LoginLayout();
   if(CURRENT_TOKEN!=null){
-    //widget=LavieLayoutScreen();
+    widget=LavieLayoutScreen();
   }
   runApp(MyApp(widget: widget,));
 

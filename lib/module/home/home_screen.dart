@@ -194,4 +194,29 @@ class HomeScreen extends StatelessWidget {
           ),
         ));
   }
+
+  Widget pageContent(BuildContext context){
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      mainAxisSpacing: 3.0,
+      crossAxisSpacing: 5.0,
+      childAspectRatio: 1/2,
+      children: List.generate(
+        LaVieCubit.get(context).products.length,
+            (index) => productItem(
+          data: LaVieCubit.get(context).products[index],
+          increaseFunction: () {
+            LaVieCubit.get(context).changeCountOfProduct(index, '+');
+          },
+          decreaseFunction: () {
+            LaVieCubit.get(context).changeCountOfProduct(index, '-');
+          },
+          addToCartFunction: () {  },
+          count: LaVieCubit.get(context).counts[index],
+        ),
+      ),
+    );
+  }
 }
