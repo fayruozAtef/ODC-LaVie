@@ -4,14 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lavei/layout/lavie_layout/cubit/states.dart';
 import 'package:lavei/module/home/home_screen.dart';
 import 'package:lavei/module/notification/notification_screen.dart';
-import 'package:lavei/module/plants/plants_screen.dart';
+import 'package:lavei/module/blogs/blogs_screen.dart';
 import 'package:lavei/module/profile/profile_screen.dart';
 import 'package:lavei/shared/component/constants.dart';
 import 'package:lavei/shared/network/local/cach_helper.dart';
 import 'package:lavei/shared/network/remote/dio_helper.dart';
 import 'package:lavei/shared/network/remote/end_points.dart';
 import '../../../model/product_model/Data.dart';
-import '../../../model/product_model/Plant.dart';
 import '../../../module/scan_qr_code/scan_qr_code_screen.dart';
 
 class LaVieCubit extends Cubit<LaVieStates>{
@@ -24,7 +23,7 @@ class LaVieCubit extends Cubit<LaVieStates>{
 
   List<Widget>screens=[
     HomeScreen(),
-    PlantsScreen(),
+    BlogsScreen(),
     ScanQrCodeScreen(),
     NotificationScreen(),
     ProfileScreen(),
@@ -32,6 +31,13 @@ class LaVieCubit extends Cubit<LaVieStates>{
 
   void changeBottomNav(int index){
     currentBottomNavBarIndex=index;
+    if(index==0){
+      getAllBlogs();
+    }
+    if(index==-1){
+      getAllProducts(GET_ALL_PRODUCT);
+      currentCategoryIndex=0;
+    }
     emit(ChangeBottomNavBarState());
   }
 
@@ -65,7 +71,6 @@ class LaVieCubit extends Cubit<LaVieStates>{
         url: url,
         token: CURRENT_TOKEN ?? "")
         .then((value) {
-          //allProducts=AllProducts.fromJson(value.data);
           for (var element in value.data['data']) {
             products.add(Data.fromJson(element));
             counts.add(1);
@@ -85,6 +90,25 @@ class LaVieCubit extends Cubit<LaVieStates>{
     }
     emit(ChangeCountOfProductState());
 
+  }
+
+  void getAllBlogs(){
+    emit(GetAllBlogsLoadingState());
+    DioHelper.getData(
+        url: GET_ALL_BLOGS,
+        token: CURRENT_TOKEN ?? "")
+        .then((value) {
+          print(value.data);
+          print('Current Token --> $CURRENT_TOKEN');
+      /*for (var element in value.data['data']) {
+
+      }*/
+      emit(GetAllBlogsSuccessState());
+    })
+        .catchError((error) {
+      print('Error --> '+error.toString());
+      emit(GetAllBlogsErrorState());
+    });
   }
 
 }

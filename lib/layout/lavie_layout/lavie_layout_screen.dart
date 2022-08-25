@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lavei/layout/lavie_layout/cubit/cubit.dart';
+import 'package:lavei/module/scan_qr_code/scan_qr_code_screen.dart';
+import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/network/remote/end_points.dart';
 import '../../shared/style/colors.dart';
 import 'cubit/states.dart';
@@ -50,7 +52,7 @@ class LavieLayoutScreen extends StatelessWidget {
                           ),
                           IconButton(
                             icon: ImageIcon(AssetImage('assets/images/qr-code-scan.png')),
-                            onPressed: (){LaVieCubit.get(context).changeBottomNav(1);},
+                            onPressed: (){navigateTo(context, ScanQrCodeScreen());},
                           ),
 
                         ],

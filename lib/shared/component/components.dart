@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../../model/product_model/Data.dart';
 import '../style/colors.dart';
@@ -92,6 +93,8 @@ Widget defaultButton({
 );
 
 Widget mySpace()=>const SizedBox(height: 20.0,);
+
+Widget myDivider()=>Container(height: 1.0,color: HexColor('#E8EBF0'),);
 
 enum ToastStates {SUCCESS, ERROR, WARNING}
 
@@ -194,7 +197,7 @@ Widget productItem({
                       children: [
                         Expanded(
                           child: Image(
-                            image: AssetImage('assets/images/plant.png'),
+                            image: NetworkImage('https://lavie.orangedigitalcenteregypt.com${data.imageUrl}')  ,
                             width: 210.0,
                             height: 210.0,
                           ),

@@ -95,30 +95,6 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20,),
-                  /*Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: categoryItem('All',(){}),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding:const  EdgeInsets.only(right: 5.0),
-                          child: categoryItem('Plants',(){}),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: categoryItem('Seeds',(){}),
-                        ),
-                      ),
-                      Expanded(child: categoryItem('Tools',(){})),
-
-                    ],
-                  ),*/
                   DefaultTabController(
                     length: 4,
                     initialIndex: LaVieCubit.get(context).currentCategoryIndex,

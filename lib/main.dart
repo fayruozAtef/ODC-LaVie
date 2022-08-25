@@ -20,7 +20,7 @@ Future<void> main() async {
   CURRENT_TOKEN= CashHelper.getData(key: SharedKeys.CURRENT_API);
   Widget widget=LoginLayout();
   if(CURRENT_TOKEN!=null){
-    widget=LavieLayoutScreen();
+    //widget=LavieLayoutScreen();
   }
   runApp(MyApp(widget: widget,));
 

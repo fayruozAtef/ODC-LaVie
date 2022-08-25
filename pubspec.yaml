@@ -50,6 +50,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   google_sign_in: ^5.4.1
   auth: ^8.1.0
+  flutter_barcode_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_test:
