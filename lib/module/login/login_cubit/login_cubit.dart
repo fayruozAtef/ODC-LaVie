@@ -102,4 +102,30 @@ class LoginCubit extends Cubit<LoginStates>{
       emit(CreateUserWithEmailAndPasswordErrorState(error: error));
     });
   }
+
+  void sendOTPToEmail(String email){
+    emit(SendOTPCodeLoadingState());
+    DioHelper.postData(url: SEND_OTP_CODE, data: {'email': email})
+        .then((value) {
+          print('OTP send successfully');
+          emit(SendOTPCodeSuccessState());
+        })
+        .catchError((onError) {
+          if(onError is DioError)
+            print('Error send OTP '+onError.response!.data['message']);
+          emit(SendOTPCodeErrorState(error: onError));
+        });
+  }
+
+  void verifyOTPMessage({required String code, required String email}){
+    emit(VerifyOTPCodeLoadingState());
+    DioHelper.postData(
+            url: VERIFY_OTP_CODE, data: {'email': email, 'otp': code})
+        .then((value) {
+          emit(VerifyOTPCodeSuccessState());
+        })
+        .catchError((error) {
+          emit(VerifyOTPCodeErrorState(error: error));
+        });
+  }
 }

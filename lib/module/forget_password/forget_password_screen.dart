@@ -1,8 +1,10 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lavei/module/confirm_otp/confirm_otp_screen.dart';
 import '../../shared/component/components.dart';
 import '../login/login_cubit/login_cubit.dart';
 import '../login/login_cubit/login_states.dart';
@@ -13,7 +15,17 @@ class ForgetPasswordScreen extends StatelessWidget {
   var emailController=TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit,LoginStates>(
+    return BlocConsumer<LoginCubit,LoginStates>(
+      listener: (context, state){
+        if (state is SendOTPCodeErrorState){
+          if(state.error is DioError){
+            showToast(messege: state.error.response!.data['message'], state: ToastStates.ERROR);
+          }
+        }
+        if(state is SendOTPCodeSuccessState){
+          navigateTo(context, ConfirmOTPCodeScreen(email: emailController.text,));
+        }
+      },
       builder: (context, state){
         return Scaffold(
           body: Container(
@@ -85,11 +97,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                                         mySpace(),
 
                                         ConditionalBuilder(
-                                            condition: state is! ForgetPasswordLoadingState,
+                                            condition: state is! SendOTPCodeLoadingState,
                                             builder: (context)=>defaultButton(
                                                 function: (){
                                                   if(formKey.currentState!.validate()){
-
+                                                    LoginCubit.get(context).sendOTPToEmail(emailController.text);
                                                   }
                                                 },
                                                 text: 'Forget Password'
@@ -125,7 +137,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
                       child: Align(
                         alignment: Alignment.bottomLeft,

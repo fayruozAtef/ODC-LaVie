@@ -45,8 +45,10 @@ Widget defaultTextFormField({
   double width=double.infinity,
   IconData? sufixIcon,
   VoidCallback? suffixWork,
+  int? maxLength,
+  double height=50.0,
 })=>SizedBox(
-  height: 50.0,
+  height: height,
   child: TextFormField(
     controller: controler,
     keyboardType: input,
@@ -55,6 +57,7 @@ Widget defaultTextFormField({
     onChanged: onChange,
     validator: validate,
     style: GoogleFonts.roboto(textStyle:TextStyle(height: 1.0, color: Colors.black.withOpacity(.8))),
+    maxLength:maxLength ,
     decoration: InputDecoration(
       labelText: lable,
       errorStyle: TextStyle(height: 0.3),
@@ -78,6 +81,7 @@ Widget defaultButton({
   ),
   child: MaterialButton(
     onPressed: function,
+    
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

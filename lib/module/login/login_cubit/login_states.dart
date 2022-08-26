@@ -33,8 +33,20 @@ class CreateUserWithEmailAndPasswordErrorState extends LoginStates{
   CreateUserWithEmailAndPasswordErrorState({required this.error});
 }
 
-class ForgetPasswordLoadingState extends LoginStates{}
+class SendOTPCodeLoadingState extends LoginStates{}
 
-class ForgetPasswordSuccessState extends LoginStates{}
+class SendOTPCodeSuccessState extends LoginStates{}
 
-class ForgetPasswordErrorState extends LoginStates{}
+class SendOTPCodeErrorState extends LoginStates{
+  dynamic error;
+  SendOTPCodeErrorState({required this.error});
+}
+
+class VerifyOTPCodeLoadingState extends LoginStates{}
+
+class VerifyOTPCodeSuccessState extends LoginStates{}
+
+class VerifyOTPCodeErrorState extends LoginStates{
+  dynamic error;
+  VerifyOTPCodeErrorState({required this.error});
+}
