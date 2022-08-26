@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool kisweb;
+    try{
+      if(Platform.isAndroid||Platform.isIOS) {
+        kisweb=false;
+      } else {
+        kisweb=true;
+      }
+    } catch(e){
+      kisweb=true;
+    }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -93,7 +105,7 @@ class MyApp extends StatelessWidget {
 
 
       ),
-      home: AnimatedSplashScreen(
+      home:(kisweb)? widget: AnimatedSplashScreen(
         duration: 5000,
         splash: SplashScreen(),
         nextScreen: widget,

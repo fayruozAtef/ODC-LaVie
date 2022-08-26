@@ -18,8 +18,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit,LoginStates>(
-      listener: (context, state){},
+    return BlocBuilder<LoginCubit,LoginStates>(
       builder: (context,state)=>Container(
         child: Center(
           child: Padding(
@@ -90,13 +89,11 @@ class LoginScreen extends StatelessWidget {
                                       child: Checkbox(
                                           value: LoginCubit.get(context).rememberMe,
                                           onChanged: (value){
-
+                                            LoginCubit.get(context).changeRememberMeState();
                                           }
                                       )
                                   ),
-                                  // You can play with the width to adjust your
-                                  // desired spacing
-                                  SizedBox(width: 3.0),
+                                  const SizedBox(width: 3.0),
                                   Text(
                                     "Remember me",
                                     maxLines: 1,

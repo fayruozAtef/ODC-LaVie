@@ -4,6 +4,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lavei/module/blogs/blogs_screen.dart';
 import 'package:lavei/shared/component/components.dart';
 import 'package:lavei/shared/style/colors.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -248,7 +249,9 @@ class _ScanQrCodeScreenState extends State<ScanQrCodeScreen> {
                     style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 14.0,fontWeight: FontWeight.w400,color: textColor)),
                   ),
                   const SizedBox(height: 10.0,),
-                  defaultButton(function: (){}, text: 'Go To Blog'),
+                  defaultButton(function: (){
+                    navigateTo(context, BlogsScreen());
+                  }, text: 'Go To Blog'),
                 ],
               ),
             )
