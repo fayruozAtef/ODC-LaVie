@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lavei/module/login/login_cubit/login_states.dart';
+import 'package:lavei/module/new-password/new_password_screen.dart';
 
 import '../../shared/component/components.dart';
 import '../login/login_cubit/login_cubit.dart';
@@ -30,7 +31,7 @@ class _ConfirmOTPCodeScreenState extends State<ConfirmOTPCodeScreen> {
     return BlocConsumer<LoginCubit,LoginStates>(
       listener: (context, state){
         if(state is VerifyOTPCodeSuccessState){
-          //navigate to new password screen
+          navigateAndDelete(context, NewPasswordScreen(email: widget.email,otpCode: otpCodeController.text,));
         }
         if(state is VerifyOTPCodeErrorState){
           if(state.error is DioError){

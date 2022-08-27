@@ -50,3 +50,12 @@ class VerifyOTPCodeErrorState extends LoginStates{
   dynamic error;
   VerifyOTPCodeErrorState({required this.error});
 }
+
+class ResetPasswordLoadingState extends LoginStates{}
+
+class ResetPasswordSuccessState extends LoginStates{}
+
+class ResetPasswordErrorState extends LoginStates{
+  dynamic error;
+  ResetPasswordErrorState({required this.error});
+}

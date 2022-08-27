@@ -128,4 +128,17 @@ class LoginCubit extends Cubit<LoginStates>{
           emit(VerifyOTPCodeErrorState(error: error));
         });
   }
+
+  void resetPassword({required String otpCode, required String email,required String password}){
+    emit(ResetPasswordLoadingState());
+    DioHelper.postData(
+        url: RESET_PASSWORD,
+        data: {'email': email, 'otp': otpCode, 'password': password})
+        .then((value) {
+          emit(ResetPasswordSuccessState());
+        })
+        .catchError((error) {
+          emit(ResetPasswordErrorState(error: error));
+        });
+  }
 }
